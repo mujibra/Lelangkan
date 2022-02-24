@@ -18,13 +18,15 @@
   },
   "homepage": "https://github.com/mujibra/Lelangkan#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "pg": "^8.7.3",
-    "sequelize-cli": "^6.4.1"
+    "express-session": "^1.17.2",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
-    "sequelize": "^6.16.2"
+    "sequelize": "^6.16.2",
+    "sequelize-cli": "^6.4.1"
   }
 }
