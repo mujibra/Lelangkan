@@ -12,18 +12,32 @@ class Controller {
                 },
                 {
                   model: Item,
-                  attributes: ['name', 'picture']
+                  attributes:['id', 'name', 'picture'],
                 }
               ]
         }
         User.findAll(option)
         .then((data) => {
-            console.log(data[0])
-            res.send(data)
+          // console.log(data[0].username)
+          // res.send(data[0].Items[0].name)
+          res.render('homepage',{data})
         })
         .catch((err) => {
             res.send(err)
         })
+    }
+
+    static itemDetail(req, res){
+      let {id} = req.params
+      console.log(id)
+      Item.findByPk(id)
+      .then((item) => {
+        // console.log(item)
+        res.render('productpage', {item})
+      })
+      .catch((err) => {
+        res.send(err)
+      })
     }
 }
 
