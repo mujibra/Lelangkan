@@ -2,7 +2,6 @@ const express = require('express')
 const Controller = require('../controllers/controller')
 const router = express.Router()
 
-
 //signin----
 router.get('/signin', Controller.signInForm)
 router.post('/signin', Controller.addUser)

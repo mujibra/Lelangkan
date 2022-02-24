@@ -1,4 +1,6 @@
+
 const { User, Item, Profile } = require("../models");
+const formatRp = require("../helpers/formatRupiah")
 const bcrypt = require("bcryptjs")
 
 class Controller {
@@ -24,6 +26,7 @@ class Controller {
       .catch((err) => {
         res.send(err)
       })
+    }
   }
 
   static itemDetail(req, res){
@@ -88,6 +91,7 @@ class Controller {
       else res.redirect("/login")
     })
   }
+
 }
 
 module.exports = Controller
