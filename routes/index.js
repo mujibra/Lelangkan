@@ -10,6 +10,8 @@ router.post('/signin', Controller.addUser)
 router.get('/login', Controller.logInForm)
 router.post('/login', Controller.login)
 
+router.get('/home', Controller.home)
+
 //Session----
 router.use((req, res, next) => {
     if (!req.session.userId) {
@@ -25,7 +27,12 @@ router.use((req, res, next) => {
 //logout-----
 router.get('/logout', Controller.logout)
 
-router.get('/home', Controller.home)
+router.get('/addProduct', Controller.productForm)
+router.post('/addProduct', Controller.addProduct)
+
+
 router.get('/productpage/:id', Controller.itemDetail)
+
+
 
 module.exports = router

@@ -1,4 +1,3 @@
-
 const { User, Item, Profile } = require("../models");
 const formatRp = require("../helpers/formatRupiah")
 const bcrypt = require("bcryptjs")
@@ -6,7 +5,7 @@ const bcrypt = require("bcryptjs")
 class Controller {
   static home(req, res) {
     let option = {
-      where: {type: 'seller'},
+      where: { type: 'seller' },
       attributes: ['username'],
       include: [
         {
@@ -15,31 +14,33 @@ class Controller {
         },
         {
           model: Item,
-          attributes:['id', 'name', 'picture'],
+          attributes: ['id', 'name', 'picture'],
         }
       ]
     }
     User.findAll(option)
       .then((data) => {
-        res.render('homepage',{ data })
+        res.render('homepage', { data })
       })
       .catch((err) => {
         res.send(err)
       })
-    }
   }
 
-  static itemDetail(req, res){
-    let {id} = req.params
+
+  static itemDetail(req, res) {
+    let { id } = req.params
 
     Item.findByPk(id)
-    .then((item) => {
-      // console.log(item)
-      res.render('productpage', { item })
-    })
-    .catch((err) => {
-      res.send(err)
-    })
+      .then((item) => {
+        // console.log(item)
+        let priceFormatted = formatRp(item.price)
+        res.render('productpage', { item, priceFormatted })
+      })
+      .catch((err) => {
+        res.send(err)
+      })
+
   }
 
   static signInForm(req, res) {
@@ -47,9 +48,9 @@ class Controller {
   }
 
   static addUser(req, res) {
-    const { username, phone, email, password } = req.body
+    const { username, phone, email, password, type } = req.body
 
-    User.create({ username, phone, email, password })
+    User.create({ username, phone, email, password, type })
       .then(() => {
         res.redirect("/")
       })
@@ -62,7 +63,7 @@ class Controller {
   }
 
   static login(req, res) {
-    const { username,  password } = req.body
+    const { username, password } = req.body
 
     User.findOne({ where: { username } })
       .then(user => {
@@ -71,7 +72,7 @@ class Controller {
 
           if (valid) {
 
-            req.session.userId = user.id 
+            req.session.userId = user.id
             return res.redirect("/home")
           } else {
             const error = "invalid password / username"
@@ -79,19 +80,31 @@ class Controller {
           }
         } else {
           const error = "invalid password / username"
-            return res.redirect(`/login?error=${error}`)
+          return res.redirect(`/login?error=${error}`)
         }
       })
-      .catch(err => res.send(err)) 
+      .catch(err => res.send(err))
   }
 
-  static logout (req, res) {
+  static logout(req, res) {
     req.session.destroy((err) => {
       if (err) res.send(err);
       else res.redirect("/login")
     })
   }
 
-}
+  static productForm(req, res) {
+    res.render("formJual")
+  }
 
+  static addProduct(req, res) {
+    const { name, price, description, status, picture } = req.body
+
+    Item.create({ name, price, description, status, picture })
+      .then(() => {
+        res.redirect("/home")
+      })
+      .catch(err => res.send(err))
+  }
+}
 module.exports = Controller
