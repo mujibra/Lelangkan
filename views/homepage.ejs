@@ -10,11 +10,11 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+<body style="background-color: #273746;">
+    <nav style="background-color: #34495E;" class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="./homepage.html">
-                <img src="../images/Lelangkan!.png" width="130" height="70">
+                <img src="Lelangkan!.png" width="130" height="70">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -30,9 +30,15 @@
                 <div>
                     <form class="navbar-item row row-cols-lg-auto g-3 align-items-center">
                         <div class="input-group column is-full">
-                            <input type="text" class="form-control " id="inlineFormInputGroupUsername"
-                                placeholder="Search">
-                            <button type="button" class="btn btn-outline-secondary">
+                            <form action="/home/search" method="post">
+                            <select name="sort">
+                                <option value="" selected>--- search by ---</option>
+                                <option value="username">username</option>
+                                <option value="itemName">item</option>
+                            </select>
+                            <input type="text" name="search" class="form-control " id="inlineFormInputGroupUsername" placeholder="Search">
+                            <button type="submit" class="btn btn-outline-secondary">
+                            </form>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-search" viewBox="0 0 16 16">
                                     <path
@@ -81,7 +87,7 @@
                 </p>
             </div>
             <div class="columns">
-                <% data.slice(2).forEach((el) => { %>
+                <% data.forEach((el) => { %>
                     <div class="column">
                         <div class="card" id="Data 1">
                             <div class="card-image">
