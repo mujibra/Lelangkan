@@ -10,6 +10,7 @@ module.exports = {
       },
       profileId: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         references: {
           model: 'Users',
           key: 'id'

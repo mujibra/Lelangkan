@@ -1,12 +1,13 @@
 const { User, Item, Profile, sequelize } = require("../models");
 const formatRp = require("../helpers/formatRupiah")
 const bcrypt = require("bcryptjs")
-const {Op} = require('sequelize')
+const {Op} = require('sequelize');
+const session = require("express-session");
 
 class Controller {
   static home(req, res) {
     const {sort, search} = req.query
-    console.log(sort, search)
+    // console.log(sort, search)
     
     let option = {
       where: sort === 'username' ? { username: {[Op.startsWith]: search}, type: 'seller' } : { type: 'seller' },
@@ -30,14 +31,13 @@ class Controller {
     }
     User.findAll(option)
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         res.render('homepage', { data })
       })
       .catch((err) => {
         res.send(err)
       })
   }
-
 
   static itemDetail(req, res) {
     let { id } = req.params
@@ -59,9 +59,13 @@ class Controller {
   }
 
   static addUser(req, res) {
-    const { username, phone, email, password, type } = req.body
+    console.log(req.body)
+    const { name, location, username, phone, email, password, type } = req.body
 
     User.create({ username, phone, email, password, type })
+      .then(() => {
+        Profile.create({ name, location })
+      })
       .then(() => {
         res.redirect("/")
       })
@@ -84,7 +88,7 @@ class Controller {
           if (valid) {
 
             req.session.userId = user.id
-            return res.redirect("/home")
+            return res.redirect(`/home`)
           } else {
             const error = "invalid password / username"
             return res.redirect(`/login?error=${error}`)
@@ -109,18 +113,15 @@ class Controller {
   }
 
   static addProduct(req, res) {
+    let ownerId = req.session.userId
     const { name, price, description, status, picture } = req.body
 
-    Item.create({ name, price, description, status, picture })
+    Item.create({ name, price, description, status, picture, ownerId})
       .then(() => {
         res.redirect("/home")
       })
       .catch(err => res.send(err))
   }
 
-  static search(req, res) {
-    // let sort = req.body
-    // console.log(sort)
-  }
 }
 module.exports = Controller

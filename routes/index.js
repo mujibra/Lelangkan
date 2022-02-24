@@ -32,7 +32,7 @@ router.post('/addProduct', Controller.addProduct)
 
 router.get('/productpage/:id', Controller.itemDetail)
 
-router.get('/home/search?:sort=:search', Controller.search)
+// router.get('/home/search?:sort=:search', Controller.search)
 
 
 
