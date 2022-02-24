@@ -41,16 +41,59 @@ class Controller {
 
   static itemDetail(req, res) {
     let { id } = req.params
-
+    const userId = req.session.userId
+    // console.log(userId)
     Item.findByPk(id)
       .then((item) => {
         // console.log(item)
         let priceFormatted = formatRp(item.price)
-        res.render('productpage', { item, priceFormatted })
+        let redir
+        if(userId === item.ownerId){
+          redir = `/editProduct/${id}`
+        } else {
+          redir = ''
+        }
+        res.render('productpage', { item, priceFormatted, redir})
       })
       .catch((err) => {
         res.send(err)
       })
+
+  }
+
+  static itemEdit(req, res){
+
+    let { id } = req.params
+    const userId = req.session.userId
+
+    Item.findByPk(id)
+      .then((item) => {
+        if(userId === item.ownerId){
+          res.render('editform', { item })
+        }    
+      })
+      .catch((err) => {
+        res.send(err)
+      })
+    
+  }
+
+  static itemUpdate(req, res){
+
+    let { id } = req.params
+    const ownerId = req.session.userId
+    const { name, price, description, status, picture } = req.body
+    let option = {
+      where: {
+        id: id
+      }
+    }
+    console.log(id, req.body, ownerId)
+    Item.update({ name, price, description, status, picture, ownerId}, option)
+      .then(() => {
+        res.redirect("/home")
+      })
+      .catch(err => res.send(err))
 
   }
 
