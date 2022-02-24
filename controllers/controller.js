@@ -1,6 +1,7 @@
-const { User, Item, Profile } = require("../models");
+const { User, Item, Profile, sequelize } = require("../models");
 const formatRp = require("../helpers/formatRupiah")
 const bcrypt = require("bcryptjs")
+const {Op} = require('sequelize')
 
 class Controller {
   static home(req, res) {
@@ -10,11 +11,21 @@ class Controller {
       include: [
         {
           model: Profile,
-          attributes: ['name']
+          attributes: ['name'],
+          where: {
+            name: {
+              [Op.not]: null
+            }
+          }
         },
         {
           model: Item,
           attributes: ['id', 'name', 'picture'],
+          where: {
+            id: {
+              [Op.not]: null
+            }
+          }
         }
       ]
     }
