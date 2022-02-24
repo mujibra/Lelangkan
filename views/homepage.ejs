@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lelangkan!</title>
@@ -77,7 +76,6 @@
             </p>
             <a href="./formJual.html" class="button is-primary is-rounded">Jual</a>
         </div>
-        <%= JSON.stringify(data) %>
         <div class="box">
             <div>
                 <p>
@@ -85,124 +83,40 @@
                 </p>
             </div>
             <div class="columns">
-                <% data.slice(6).forEach((el, i) => { %>
-                        <div class="column">
-                            <div class="card" id="Data 1">
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                        <img src="<%= el.picture %>" alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <div class="has-text-centered">
-                                        <h3><%= el.name %></h3>
-                                    </div> <br>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <figure class="image is-48x48">
-                                                <img src="../images/user.png" alt="Placeholder image">
-                                            </figure>
-                                        </div>
-        
-                                        <div class="media-content">
-                                            <p class="title is-4"><%= el.User.username %></p>
-                                            <p class="subtitle is-6">@johnsmith</p>
-                                            <a href="./produkpage.html" class="stretched-link "></a>
-                                        </div>
+                <% data.forEach((el) => { %>
+                    <div class="column">
+                        <div class="card" id="Data 1">
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                    <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="has-text-centered">
+                                    <h3> <%= el.Items[0].name %> </h3>
+                                </div> <br>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48">
+                                            <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
+                                        </figure>
                                     </div>
-        
+    
+                                    <div class="media-content">
+                                        <p class="title is-4"><%= el.Profile.name %></p>
+                                        <p class="subtitle is-6">@<%= el.username %></p>
+                                        <a href="./productpage/<%= el.Items[0].id %>" class="stretched-link "></a>
+                                    </div>
                                 </div>
+    
                             </div>
-                        </div> 
+                        </div>
+                    </div>
                 <% }) %>
-            </div>
-        </div>
-        <div class="box">
-            <div>
-                <p>
-                <h1>Barang pilihan lainnya</h1>
-                </p>
-            </div>
-            <div class="columns">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="../images/jLTuXE0Tt0.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="has-text-centered">
-                                <h4> Kamera kayu</h4>
-                                <a href="./produkpage.html" class="stretched-link "></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="../images/jLTuXE0Tt0.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="has-text-centered">
-                                <h4> Kamera kayu</h4>
-                                <a href="./produkpage.html" class="stretched-link "></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="../images/jLTuXE0Tt0.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="has-text-centered">
-                                <h4> Kamera kayu</h4>
-                                <a href="./produkpage.html" class="stretched-link "></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="../images/jLTuXE0Tt0.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="has-text-centered">
-                                <h4> Kamera kayu</h4>
-                                <a href="./produkpage.html" class="stretched-link "></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="../images/jLTuXE0Tt0.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="has-text-centered">
-                                <h4> Kamera kayu</h4>
-                                <a href="./produkpage.html" class="stretched-link "></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
 </body>
 
-</html>
+</html> 

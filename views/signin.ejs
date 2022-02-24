@@ -49,7 +49,7 @@
             <h3 class="has-text-centered">Daftar</h3>
             <h6 class="has-text-centered">Sudah punya akun? <a href="./login.html">Masuk!</a></h6>
         </div>
-        <form action="/signIn" method="POST">    
+        <form action="/signIn" method="POST">
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control">
@@ -68,6 +68,16 @@
                     <input class="input" type="email" name="email" placeholder="johndoe@gmiail.com" required>
                 </div>
             </div>
+            <div class="field select">
+                <label class="label">User Type</label>
+                <div class="control">
+                    <select name="type">
+                        <option value="seller">Seller</option>
+                        <option value="buyer">Buyer</option>
+                    </select>
+                </div>
+
+            </div>
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control">
@@ -82,7 +92,7 @@
                 </p>
             </div>
         </form>
-        
+
     </div>
 </body>
 

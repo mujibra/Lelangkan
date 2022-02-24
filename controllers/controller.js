@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs")
 class Controller {
   static home(req, res) {
     let option = {
+      where: {type: 'seller'},
       attributes: ['username'],
       include: [
         {
@@ -12,17 +13,30 @@ class Controller {
         },
         {
           model: Item,
-          attributes: ['name', 'picture']
+          attributes:['id', 'name', 'picture'],
         }
       ]
     }
     User.findAll(option)
       .then((data) => {
-        res.render(data)
+        res.render('homepage',{ data })
       })
       .catch((err) => {
         res.send(err)
       })
+  }
+
+  static itemDetail(req, res){
+    let {id} = req.params
+
+    Item.findByPk(id)
+    .then((item) => {
+      // console.log(item)
+      res.render('productpage', { item })
+    })
+    .catch((err) => {
+      res.send(err)
+    })
   }
 
   static signInForm(req, res) {
@@ -53,7 +67,9 @@ class Controller {
           const valid = bcrypt.compareSync(password, user.password)
 
           if (valid) {
-            return res.redirect("/")
+
+            req.session.userId = user.id 
+            return res.redirect("/home")
           } else {
             const error = "invalid password / username"
             return res.redirect(`/login?error=${error}`)
@@ -63,7 +79,14 @@ class Controller {
             return res.redirect(`/login?error=${error}`)
         }
       })
-      .catch(err => res.send(err))
+      .catch(err => res.send(err)) 
+  }
+
+  static logout (req, res) {
+    req.session.destroy((err) => {
+      if (err) res.send(err);
+      else res.redirect("/login")
+    })
   }
 }
 
