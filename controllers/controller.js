@@ -1,4 +1,5 @@
 const {User, Item, Profile} = require("../models");
+const formatRp = require("../helpers/formatRupiah")
 
 class Controller {
     static home(req, res){
@@ -29,11 +30,12 @@ class Controller {
 
     static itemDetail(req, res){
       let {id} = req.params
-      console.log(id)
+      // console.log(id)
       Item.findByPk(id)
       .then((item) => {
         // console.log(item)
-        res.render('productpage', {item})
+        const priceFormatted = formatRp(item.price)
+        res.render('productpage', {item, priceFormatted})
       })
       .catch((err) => {
         res.send(err)
