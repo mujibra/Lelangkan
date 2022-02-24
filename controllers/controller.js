@@ -3,6 +3,7 @@ const {User, Item, Profile} = require("../models");
 class Controller {
     static home(req, res){
         let option = {
+            where: {type: 'seller'},
             attributes: ['username'],
             include: [
                 {
