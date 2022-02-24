@@ -5,8 +5,11 @@ const {Op} = require('sequelize')
 
 class Controller {
   static home(req, res) {
+    const {sort, search} = req.query
+    console.log(sort, search)
+    
     let option = {
-      where: { type: 'seller' },
+      where: sort === 'username' ? { username: {[Op.startsWith]: search}, type: 'seller' } : { type: 'seller' },
       attributes: ['username'],
       include: [
         {
@@ -21,16 +24,13 @@ class Controller {
         {
           model: Item,
           attributes: ['id', 'name', 'picture'],
-          where: {
-            id: {
-              [Op.not]: null
-            }
-          }
+          where: sort === 'itemName' ? {name : {[Op.startsWith]: search}, id: {[Op.not]: null}} : {id: {[Op.not]: null}}
         }
       ]
     }
     User.findAll(option)
       .then((data) => {
+        console.log(data)
         res.render('homepage', { data })
       })
       .catch((err) => {
@@ -116,6 +116,11 @@ class Controller {
         res.redirect("/home")
       })
       .catch(err => res.send(err))
+  }
+
+  static search(req, res) {
+    // let sort = req.body
+    // console.log(sort)
   }
 }
 module.exports = Controller

@@ -30,8 +30,9 @@ router.get('/logout', Controller.logout)
 router.get('/addProduct', Controller.productForm)
 router.post('/addProduct', Controller.addProduct)
 
-
 router.get('/productpage/:id', Controller.itemDetail)
+
+router.get('/home/search?:sort=:search', Controller.search)
 
 
 
