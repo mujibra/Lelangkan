@@ -43,68 +43,52 @@
         </div>
         </div>
     </nav>
-    <p></p>
-    <div class="field container column is-5 box section">
-        <div class="section">
-            <h3 class="has-text-centered">Daftar</h3>
-            <h6 class="has-text-centered">Sudah punya akun? <a href="./login.html">Masuk!</a></h6>
-        </div>
-        <form action="/signIn" method="POST">
+    <div class="container box">
+        <h1>Detail Barang</h1>
+        <form action="" method="POST">
             <div class="field">
-                <label class="label">Full name</label>
+                <label class="label">Name</label>
                 <div class="control">
-                    <input class="input" type="text" name="name" placeholder="johndoe Abu Bakar" required>
+                    <input class="input" type="text" name="name" value="<%= item.name %>" placeholder="Buku">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Price</label>
+                <div class="control">
+                    <input class="input" type="number" name="price" value="<%= item.price %>" placeholder="Rp 25.000">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea" name="description"><%= item.description %></textarea>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Location</label>
-                <div class="control">
-                    <input class="input" type="text" name="location" placeholder="Pangandaran" required>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Username</label>
-                <div class="control">
-                    <input class="input" type="text" name="username" placeholder="johndoe" required>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Phone Number</label>
-                <div class="control">
-                    <input class="input" type="number" name="phone" placeholder="12-Digit" required>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control">
-                    <input class="input" type="email" name="email" placeholder="johndoe@gmiail.com" required>
-                </div>
-            </div>
-            <div class="field select">
-                <label class="label">User Type</label>
-                <div class="control">
-                    <select name="type">
-                        <option value="seller">Seller</option>
-                        <option value="buyer">Buyer</option>
+                    <label class="label">Status</label>
+                <div class="control select">
+                    <select name="status">
+                        <option value="On Sale" <%= item.status === 'On Sale' ? "selected" : "" %>>On Sale</option>
+                        <option value="Sold Out" <%= item.status === 'On Sale' ? "selected" : "" %>>Sold Out</option>
                     </select>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Password</label>
-                <div class="control">
-                    <input class="input" type="password" name="password" placeholder="8-Digit" required>
+                <label class="label">Picture</label>
+                <div>
+                    <input class="input" type="text" name="picture" value="<%= item.picture %>">
                 </div>
             </div>
-            <div class="field has-text-centered">
-                <p class="control">
-                    <button class="button is-success">
-                        Sign in
-                    </button>
-                </p>
+            <div class="field">
+                <div class="control">
+                    <button type="submit">Update</button>
+                </div>
             </div>
         </form>
-
     </div>
+
 </body>
 
 </html>

@@ -6,3 +6,5 @@ data.forEach(element => {
     element.updatedAt = new Date()
 });
 console.log(data)
+
+// 2. sequelize migration:generate --name add-new-column-typeUser <- key tambahan

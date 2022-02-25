@@ -31,7 +31,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="./homepage.html">
-                <img src="../images/Lelangkan!.png" width="120" height="40">
+                <img src="logo.PNG" width="30" height="40">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -45,35 +45,42 @@
     </nav>
     <div class="container box">
         <h1>Detail Barang</h1>
-        <form action="">
+        <form action="/addProduct" method="POST">
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Buku">
+                    <input class="input" type="text" name="name" placeholder="Buku">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Price</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="Rp 25.000">
+                    <input class="input" type="number" name="price" placeholder="Rp 25.000">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Description</label>
                 <div class="control">
-                    <textarea class="textarea" placeholder="Kondisi barang ini..."></textarea>
+                    <textarea class="textarea" name="description" placeholder="Kondisi barang ini..."></textarea>
                 </div>
             </div>
-
+            <div class="field">
+                    <label class="label">Status</label>
+                <div class="control select">
+                    <select name="status">
+                        <option value="On Sale">On Sale</option>
+                        <option value="Sold Out">Sold Out</option>
+                    </select>
+                </div>
+            </div>
             <div class="field">
                 <label class="label">Picture</label>
                 <div>
-                    <input type="file" id="myFile" name="filename">
+                    <input type="file" name="picture" id="myFile" name="filename">
                 </div>
             </div>
-
             <div class="field">
                 <div class="control">
                     <button class="button is-link">Submit</button>
