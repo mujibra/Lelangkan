@@ -1,16 +1,17 @@
 const { User, Item, Profile, sequelize } = require("../models");
 const formatRp = require("../helpers/formatRupiah")
 const bcrypt = require("bcryptjs")
-const {Op} = require('sequelize');
+const { Op } = require('sequelize');
 const session = require("express-session");
+const nodemailer = require('nodemailer')
 
 class Controller {
   static home(req, res) {
-    const {sort, search} = req.query
+    const { sort, search } = req.query
     // console.log(sort, search)
-    
+
     let option = {
-      where: sort === 'username' ? { username: {[Op.startsWith]: search}, type: 'seller' } : { type: 'seller' },
+      where: sort === 'username' ? { username: { [Op.startsWith]: search }, type: 'seller' } : { type: 'seller' },
       attributes: ['username'],
       include: [
         {
@@ -25,7 +26,7 @@ class Controller {
         {
           model: Item,
           attributes: ['id', 'name', 'picture'],
-          where: sort === 'itemName' ? {name : {[Op.startsWith]: search}, id: {[Op.not]: null}} : {id: {[Op.not]: null}}
+          where: sort === 'itemName' ? { name: { [Op.startsWith]: search }, id: { [Op.not]: null } } : { id: { [Op.not]: null } }
         }
       ]
     }
@@ -48,12 +49,12 @@ class Controller {
         // console.log(item)
         let priceFormatted = formatRp(item.price)
         let redir
-        if(userId === item.ownerId){
+        if (userId === item.ownerId) {
           redir = `/editProduct/${id}`
         } else {
           redir = ''
         }
-        res.render('productpage', { item, priceFormatted, redir})
+        res.render('productpage', { item, priceFormatted, redir })
       })
       .catch((err) => {
         res.send(err)
@@ -61,24 +62,24 @@ class Controller {
 
   }
 
-  static itemEdit(req, res){
+  static itemEdit(req, res) {
 
     let { id } = req.params
     const userId = req.session.userId
 
     Item.findByPk(id)
       .then((item) => {
-        if(userId === item.ownerId){
+        if (userId === item.ownerId) {
           res.render('editform', { item })
-        }    
+        }
       })
       .catch((err) => {
         res.send(err)
       })
-    
+
   }
 
-  static itemUpdate(req, res){
+  static itemUpdate(req, res) {
 
     let { id } = req.params
     const ownerId = req.session.userId
@@ -89,7 +90,7 @@ class Controller {
       }
     }
     console.log(id, req.body, ownerId)
-    Item.update({ name, price, description, status, picture, ownerId}, option)
+    Item.update({ name, price, description, status, picture, ownerId }, option)
       .then(() => {
         res.redirect("/home")
       })
@@ -102,6 +103,30 @@ class Controller {
   }
 
   static addUser(req, res) {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: "mjbramadhan@gmail.com", // generated ethereal user
+        pass: 'Apaaj@909', // generated ethereal password
+      },
+    });
+
+    // send mail with defined transport object
+    const mailOptions = {
+      from: '"Lelangkan!" <mjbramadhan@gmail.com>', // sender address
+      to: User.email, // list of receivers
+      subject: "Lelangkan account", // Subject line
+      text: "Selamat Datang", // plain text body
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("Message sent: %s", info.response);
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    })
+
     console.log(req.body)
     const { name, location, username, phone, email, password, type } = req.body
 
@@ -159,7 +184,7 @@ class Controller {
     let ownerId = req.session.userId
     const { name, price, description, status, picture } = req.body
 
-    Item.create({ name, price, description, status, picture, ownerId})
+    Item.create({ name, price, description, status, picture, ownerId })
       .then(() => {
         res.redirect("/home")
       })

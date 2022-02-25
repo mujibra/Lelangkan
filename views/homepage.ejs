@@ -10,11 +10,11 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body style="background-color: #273746;">
-    <nav style="background-color: #34495E;" class="navbar" role="navigation" aria-label="main navigation">
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="./homepage.html">
-                <img src="Lelangkan!.png" width="130" height="70">
+            <a class="navbar-item" href="/home">
+                <img src="logo.PNG" width="30" height="40">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -31,11 +31,13 @@
                     <form class="navbar-item row row-cols-lg-auto g-3 align-items-center">
                         <div class="input-group column is-full">
                             <form action="/home/search" method="post">
-                            <select name="sort">
-                                <option value="" selected>--- search by ---</option>
-                                <option value="username">username</option>
-                                <option value="itemName">item</option>
-                            </select>
+                            <div class="select">
+                                <select name="sort">
+                                    <option value="" selected disabled>--- search by ---</option>
+                                    <option value="username">username</option>
+                                    <option value="itemName">item</option>
+                                </select>
+                            </div>
                             <input type="text" name="search" class="form-control " id="inlineFormInputGroupUsername" placeholder="Search">
                             <button type="submit" class="btn btn-outline-secondary">
                             </form>
@@ -83,39 +85,80 @@
         <div class="box">
             <div>
                 <p>
-                <h1>Tawaran Tertinggi!</h1>
+                <h1>Paling Laku!</h1>
                 </p>
             </div>
-            <div class="columns">
-                <% data.forEach((el) => { %>
-                    <div class="column">
-                        <div class="card" id="Data 1">
-                            <div class="card-image">
-                                <figure class="image is-4by3">
-                                    <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="card-content">
-                                <div class="has-text-centered">
-                                    <h3> <%= el.Items[0].name %> </h3>
-                                </div> <br>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-48x48">
-                                            <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
-                                        </figure>
-                                    </div>
-    
-                                    <div class="media-content">
-                                        <p class="title is-4"><%= el.Profile.name %></p>
-                                        <p class="subtitle is-6">@<%= el.username %></p>
-                                        <a href="./productpage/<%= el.Items[0].id %>" class="stretched-link "></a>
-                                    </div>
+            <div class="columns is-multiline">
+                <% data.forEach((el, i) => { %>
+                    <% if (i <= 3) { %>
+                        <div class="column is=3">
+                            <div class="card" id="Data 1">
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
+                                    </figure>
                                 </div>
-    
+                                <div class="card-content">
+                                    <div class="has-text-centered">
+                                        <h3> <%= el.Items[0].name %> </h3>
+                                    </div> <br>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-48x48">
+                                                <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
+                                            </figure>
+                                        </div>
+        
+                                        <div class="media-content">
+                                            <p class="title is-5"><%= el.Profile.name %></p>
+                                            <p class="subtitle is-6">@<%= el.username %></p>
+                                            <a href="./productpage/<%= el.Items[0].id %>" class="stretched-link "></a>
+                                        </div>
+                                    </div>
+        
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% } %>
+                <% }) %>
+            </div>
+        </div>
+        <div class="box">
+            <div>
+                <p>
+                <h1>Barang Lainnya</h1>
+                </p>
+            </div>
+            <div class="columns is-multiline">
+                <% data.forEach((el, i) => { %>
+                        <div class="column is-2">
+                            <div class="card" id="Data 1">
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="has-text-centered">
+                                        <h6> <%= el.Items[0].name %> </h6>
+                                    </div> <br>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-48x48">
+                                                <img src="<%= el.Items[0].picture %>" alt="Placeholder image">
+                                            </figure>
+                                        </div>
+        
+                                        <div class="media-content">
+                                            <p class="title is-7"><%= el.Profile.name %></p>
+                                            <p class="title is-7">@<%= el.username %></p>
+                                            <a href="./productpage/<%= el.Items[0].id %>" class="stretched-link "></a>
+                                        </div>
+                                    </div>
+        
+                                </div>
+                            </div>
+                        </div>
                 <% }) %>
             </div>
         </div>

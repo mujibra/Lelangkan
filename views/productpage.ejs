@@ -13,8 +13,8 @@
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="./homepage.html">
-                <img src="./Lelangkan!.png" width="130" height="70">
+            <a class="navbar-item" href="/home">
+                <img src="logo.png" width="30" height="40">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -27,31 +27,6 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <!-- <a class="navbar-item">
-                    Term Conditions
-                </a>
-
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        More
-                    </a>
-
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            About
-                        </a>
-                        <a class="navbar-item">
-                            Jobs
-                        </a>
-                        <a class="navbar-item">
-                            Contact
-                        </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item">
-                            Report an issue
-                        </a>
-                    </div>
-                </div> -->
                 <div>
                     <form class="navbar-item row row-cols-lg-auto g-3 align-items-center">
                         <div class="input-group column is-full">
@@ -129,32 +104,16 @@
                 </div>
                 <div class="column is-3">
                     <div class="box">
-                        <!-- <h5>Pembelian</h5>
-                        <p>Subtotal</p> -->
                         <div>
                             <form class="navbar-item row row-cols-lg-auto g-3 align-items-center">
-                                <!-- <div class="input-group column is-7">
-
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                          </svg>
-                                    </button>
-                                    <input type="text" class="form-control has-text-centered" id="inlineFormInputGroupUsername"
-                                        placeholder="1">
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                          </svg>
-                                    </button>
-                                </div> -->
+                                
                             </form>
                         </div>
                         <h3><%= priceFormatted %></h3>
 
                         <br>
                         <div>
-                            <button class="button is-success">Buy</button> <a href="<%= redir %>" class="button is-light">edit</a>
+                            <a href="/home" class="button is-success">Buy</a> <a href="<%= redir %>" class="button is-light">edit</a>
                         </div>
                     </div>
                 </div>
